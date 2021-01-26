@@ -1,0 +1,253 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;     /* PARA QUE NO EXPANDA EL MARGIN/PADDING*/
+	font-family: Copperplate Gothic Light;
+}
+
+body{
+	background: url(img/fondo.jpg);/*LA IMAGEN OCUPA EL 100% DEL ANCHO*/
+	background-size: 100vw 100vh;    /*Y EL ALTO DE LA VENTANA*/
+	background-attachment: fixed;     /*PARA QUE LA IMAGEN SE QUEDE FIJA*/
+	margin: 0;    }
+
+header{
+	width: 100%;
+	height: 50px;
+	/*background: #F5B041;*/
+	background: rgba(0, 36, 33, 0.76);
+    background: linear-gradient(90deg, rgb(0, 20, 36) 0%, rgba(26, 135, 102, 0.975) 49%, rgba(0, 110, 255, 0.92) 100%);
+	color: #00306e;
+
+
+	position: fixed; /*PARA QUE EL MENU NO SE MUEVA*/
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.contenedor{ /*PARA QUE TODOS LOS OBJETOS ESTEN ALINEADOS*/
+    width: 98%;
+    margin: auto;
+}
+
+h1{
+	float:;
+	list-style: ;
+	margin-top: 10px;
+	font-size: 25px; /*PONER BIEN EL TAMAÑO*/
+	text-align: left;
+	font-family: Copperplate Gothic Light;
+	text-shadow: 1px 1px 1px #000;
+	color: #F5B041;
+}
+
+#banner{
+	margin-top: 0px;
+	position: relative;
+	text-shadow: 1px 1px 1px #000;
+	}
+
+#banner img{
+	/*position: absolute;*/
+	top: 50px;
+	width: 100%; 
+	height: 100%;
+}
+#banner .contenedor{
+	position: absolute;
+	margin-top: 10px;
+	top: 50%; left: 50%;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	color: #fff;
+}
+
+#banner h2{ 
+	font-size: 26px;
+	margin-top: 60px;
+ }
+#banner a{
+	display: block;
+	width: 120px; color: #6E2C00;
+	text-decoration: none;
+	background: #F5B041;
+	padding: 7px; margin-top: 10px;
+	border: 3px solid #fff;
+}
+#banner a:hover{
+	background: rgba(51,51,51,0.5);
+}
+
+#menu-bar{
+	display: none; /*SE OCULTA EL CHECKBOX*/
+}
+
+header label{
+	float: right;
+	font-size: 28px;
+	margin: -35px 0px;
+	cursor: pointer;
+}
+
+.menu{
+	/*display: none;/*se oculta el menu solo para ver...*/
+    position: absolute; /*..la forma que esta tomando el header*/
+    top: 50px; /*para que el menu comience desde abajo del header*/
+    left: 0;
+    width: 100%;
+    height: 100vh; /*para que ocupe siempre el 100% de alto*/
+    background: rgba(51,51,51,0.9); /*de la ventana*/
+    
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+
+}
+
+header.contenedor{ /*para limpiar los float*/
+	display: table;
+}
+.menu a{
+	display: block;
+	color: #fff;
+	height: 50px;
+	text-decoration: none;
+	padding: 15px;
+	border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.menu a:hover{
+	background: rgba(255,255,255,0.5);
+}
+
+#menu-bar:checked ~/*alt 126*/ .menu{
+	-moz-transform: translateX(0%);
+	-webkit-transform: translateX(0%);
+}
+
+.cajas {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.caja-proyectos{
+	width: 200px;
+	float: ;
+	border-top: 1px solid #FF2F04;
+	padding-top: 16px;
+	margin-right: 50px;
+}
+
+.caja-proyectos h2{
+	font-family: Copperplate Gothic Light;
+	font-size: 16px;
+	color: #464646;
+	margin: 6px;
+	float: right;
+}
+
+.caja-proyectos a{
+	color: #6E2C00;
+	text-decoration: none;
+	float: right;
+}
+
+/*.caja-proyectos p{
+	text-align: center;
+	float: right;
+}*/
+
+.limpiar{
+	clear: both;
+}
+.titulo{
+	display: block;
+	font-size: 30px;
+	color: #6d6d6d;
+}
+
+
+@media screen and (max-width: 950px){
+	.cajas{
+		width: 60%;
+	}
+	.caja-proyectos{
+		width: 40%;
+		padding-left: .1em;
+	}
+	footer{
+		margin-top: .1em;
+	}
+}
+
+@media screen and (max-width: 700px){
+	#cajas{
+		width: 90%;
+	}
+    footer{
+    	padding: .5em;
+       }
+    }
+
+	.borde .caja-proyectos{
+		margin: .5em;
+		padding-bottom: 1.5em;
+	}
+	
+}
+
+@media screen and (max-width: 460px){   
+     h2{
+     	font-size: 2.5em;
+     }
+   }
+
+@media screen and (max-width: 414px){
+	.cajas .caja-proyectos h2{
+		font-size: 1.25em;
+	}
+}
+
+@media screen and (max-width: 384px){
+	.cajas .caja-proyectos{
+		width: 85%;
+	}
+	.cajas .caja-proyectos h2{
+		font-size: 1.55em;
+	}
+}
+
+footer .contenedor{
+	display: flex;
+	display: flex;
+	display: -webkit-flex;
+
+	justify-content: center;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+
+    flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+
+    padding-bottom: 25px;
+
+}
+
+.copy{
+	font-size: 20px;
+}
+
+.sociales{
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+}
+
+.sociales a{
+	color: blue;
+	text-decoration: none;
+}

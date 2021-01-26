@@ -1,0 +1,207 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;     /* PARA QUE NO EXPANDA EL MARGIN/PADDING*/
+	font-family: Copperplate Gothic Light;
+}
+
+body{
+	background: url(img/fondo.jpg);/*LA IMAGEN OCUPA EL 100% DEL ANCHO*/
+	background-size: 100vw 100vh;    /*Y EL ALTO DE LA VENTANA*/
+	background-attachment: fixed;     /*PARA QUE LA IMAGEN SE QUEDE FIJA*/
+	margin: 0;    }
+
+header{
+	width: 100%;
+	height: 50px;
+	/*background: #F5B041;*/
+	background: rgba(0, 36, 33, 0.76);
+    background: linear-gradient(90deg, rgb(0, 20, 36) 0%, rgba(26, 135, 102, 0.975) 49%, rgba(0, 110, 255, 0.92) 100%);
+	color: #00306e;
+
+
+	position: fixed; /*PARA QUE EL MENU NO SE MUEVA*/
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.contenedor{ /*PARA QUE TODOS LOS OBJETOS ESTEN ALINEADOS*/
+    width: 98%;
+    margin: auto;
+}
+
+h2 {
+	font-size: 25px;
+	margin-top: 20px;
+}
+p{
+	text-align: justify;
+    font-family: Copperplate Gothic Light;
+    font-family: 28px;	
+}
+
+#menu-bar{
+	display: none; /*SE OCULTA EL CHECKBOX*/
+}
+
+header label{
+	float: right;
+	font-size: 28px;
+	margin: -30px 0;
+	cursor: pointer;
+}
+.menu{
+	/*display: none;/*se oculta el menu solo para ver...*/
+    position: absolute; /*..la forma que esta tomando el header*/
+    top: 50px; /*para que el menu comience desde abajo del header*/
+    left: 0;
+    width: 100%;
+    height: 100vh; /*para que ocupe siempre el 100% de alto*/
+    background: rgba(51,51,51,0.9); /*de la ventana*/
+    
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+
+}
+header.contenedor{ /*para limpiar los float*/
+	display: table;
+}
+.menu a{
+	display: block;
+	color: #fff;
+	height: 50px;
+	text-decoration: none;
+	padding: 15px;
+	border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+.menu a:hover{
+	background: rgba(255,255,255,0.5);
+}
+
+#menu-bar:checked ~/*alt 126*/ .menu{
+	-moz-transform: translateX(0%);
+	-webkit-transform: translateX(0%);
+}
+/*banner*/
+section{
+	width: 100%; margin-bottom: 25px;
+	float: center;
+	margin-left: auto;
+}
+#banner{
+	margin-top: 0px;
+	position: relative;
+	text-shadow: 1px 1px 1px #000;
+	}
+
+#banner img{
+	width: 100%; height: 80%;
+	margin: auto;
+}
+#banner .contenedor{
+	position: absolute;
+	top: 50%; left: 50%;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	color: #fff;
+	margin-top: 50px;
+	margin-right: 0px;
+}
+#banner h2{ font-size: 26px; }
+#banner a{
+	display: block;
+	width: 120px; color: #6E2C00;
+	text-decoration: none;
+	background: #F5B041;
+	padding: 7px; margin-top: 10px;
+	border: 3px solid #fff;
+}
+#banner a:hover{
+	background: rgba(51,51,51,0.5);
+}
+#bienvenidos{
+	text-align: center;
+}
+#bienvenidos p{
+	font-family: arial;
+}
+#blog h1,h3,h4{
+	font-family: arial;
+	text-align: center;
+}
+#blog .contenedor{
+	display: flex;
+	display: -webkit-flex;
+	float: center;
+
+	justify-content: center;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+
+    flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+#blog article{
+	margin: 35px;
+}
+#blog img{
+	width: 100%;
+	max-width: 280px;
+}
+p {
+	font-size: 20px;
+	text-align: justify;
+	margin: 30px;
+}
+h1{
+	float: ;
+	list-style: ;
+	font-size: 25px; /*PONER BIEN EL TAMAÑO*/
+	text-align: left;
+	font-family: Copperplate Gothic Light;
+	text-shadow: 1px 1px 1px #000;
+	color: #F5B041;
+	margin-top: 10px;
+}
+h4{
+	font-size: 18px; /*PONER BIEN EL TAMAÑO*/
+	text-align: left;
+	font-family: Copperplate Gothic Light;
+	text-shadow: 1px 1px 1px #000;
+	color: white;
+}
+footer #contenedor{
+	display: flex;
+	display: flex;
+	display: -webkit-flex;
+
+	justify-content: center;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+
+    flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+
+    padding-bottom: 25px;
+    font-family: 10px;
+
+    text-align: center;
+}
+	footer #contenedor{
+		justify-content: space-between;
+		-moz-justify-content: space-between;
+		-webkit-justify-content: space-between;
+	}
+	#sociales{
+		width: auto;
+	}
+	.copy {
+	font-size: 18px;
+	text-align: center;
+	font-family: Times New Roman;
+}
