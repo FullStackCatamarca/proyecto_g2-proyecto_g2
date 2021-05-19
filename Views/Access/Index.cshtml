@@ -1,0 +1,158 @@
+﻿@model TursArg.Models.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Iniciar sesión";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<br />
+<h2>Iniciar Sesión</h2>
+<br />
+<div class="row">
+    <div class="col-md-8">
+        <form id="frm">
+            <div class="col-lg-6 col-lg-offset-3">
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <label>Usuario</label><br />
+
+                        <input type="text" name="user" />
+
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <label>Pasword</label><br />
+
+                        <input type="password" name="password" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <label></label><br />
+                        <input type="submit" class="btn btn-info" value="Iniciar Sesión" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    @*
+        <div class="row">
+            <div class="col-md-8">
+                <section id="loginForm">
+
+                    @using (Html.BeginForm("Index", "Access", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Iniciar sesión" class="btn btn-success" />
+                            </div>
+                        </div>
+                    }
+
+            </div>
+        </div>
+    *@
+    @section scripts
+{
+        <script>
+    $(document).ready(function () {
+
+        $("#frm").submit(function (e) {
+            e.preventDefault();
+
+            url = "@Url.Content("~/Access/Enter")"
+            parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                } else {
+                    alert(data)
+                }
+
+            })
+
+        })
+
+    })
+
+        </script>
+    }
+
+
+    @*    <div class="row">
+                <div class="col-md-8">
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h4>Utilice una cuenta local para iniciar sesión.</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Iniciar sesión" class="btn btn-default" />
+                                </div>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Registrarse como usuario nuevo", "Register")
+                            </p>
+                    }
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
+        </div>
+    *@

@@ -1,0 +1,839 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tursArgBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Atractivo_Turisticos">
+          <Key>
+            <PropertyRef Name="atractivo_turistico_id" />
+          </Key>
+          <Property Name="atractivo_turistico_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="5000" />
+          <Property Name="imagen" Type="image" />
+          <Property Name="localidad_id" Type="int" Nullable="false" />
+          <Property Name="categoria_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="categoria_id" />
+          </Key>
+          <Property Name="categoria_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="chat_id" />
+          </Key>
+          <Property Name="chat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usuario_no_reg" Type="varchar" MaxLength="250" />
+          <Property Name="emial_usuario_no_reg" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="consulta" Type="varchar" MaxLength="500" />
+          <Property Name="respuesta" Type="varchar" MaxLength="500" />
+          <Property Name="usuario_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="departamento_id" />
+          </Key>
+          <Property Name="departamento_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departamento" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tursArgBD.dbo.Detalle_Excursiones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Detalle_Excursiones">
+          <Key>
+            <PropertyRef Name="excursion_id" />
+            <PropertyRef Name="atractivo_turistico_id" />
+          </Key>
+          <Property Name="excursion_id" Type="int" Nullable="false" />
+          <Property Name="atractivo_turistico_id" Type="int" Nullable="false" />
+          <Property Name="detalle" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Excursiones">
+          <Key>
+            <PropertyRef Name="excursion_id" />
+          </Key>
+          <Property Name="excursion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="5000" />
+          <Property Name="tipo_excursion_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Foro">
+          <Key>
+            <PropertyRef Name="foro_id" />
+          </Key>
+          <Property Name="foro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="titulo_tema" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="descripcion_tema" Type="varchar" MaxLength="250" />
+          <Property Name="fecha_ini" Type="date" Nullable="false" />
+          <Property Name="fecha_cierre" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tursArgBD.dbo.Foro_Debate' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Foro_Debate">
+          <Key>
+            <PropertyRef Name="foro_id" />
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="foro_id" Type="int" Nullable="false" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="mensaje" Type="varchar" MaxLength="500" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="localidad_id" />
+          </Key>
+          <Property Name="localidad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="localidad" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="departamento_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="perfil_id" />
+          </Key>
+          <Property Name="perfil_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfil" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tipo_Excursiones">
+          <Key>
+            <PropertyRef Name="tipo_excursion_id" />
+          </Key>
+          <Property Name="tipo_excursion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfil_id" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_alta" Type="date" Nullable="false" />
+          <Property Name="fecha_baja" Type="date" />
+        </EntityType>
+        <Association Name="FK_Atractivo_Turisticos_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Atractivo_Turisticos" Type="Self.Atractivo_Turisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="categoria_id" />
+            </Principal>
+            <Dependent Role="Atractivo_Turisticos">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Atractivo_Turisticos_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="Atractivo_Turisticos" Type="Self.Atractivo_Turisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="localidad_id" />
+            </Principal>
+            <Dependent Role="Atractivo_Turisticos">
+              <PropertyRef Name="localidad_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Excursiones_Atractivo_Turisticos">
+          <End Role="Atractivo_Turisticos" Type="Self.Atractivo_Turisticos" Multiplicity="1" />
+          <End Role="Detalle_Excursiones" Type="Self.Detalle_Excursiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Atractivo_Turisticos">
+              <PropertyRef Name="atractivo_turistico_id" />
+            </Principal>
+            <Dependent Role="Detalle_Excursiones">
+              <PropertyRef Name="atractivo_turistico_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Excursiones_Excursiones">
+          <End Role="Excursiones" Type="Self.Excursiones" Multiplicity="1" />
+          <End Role="Detalle_Excursiones" Type="Self.Detalle_Excursiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Excursiones">
+              <PropertyRef Name="excursion_id" />
+            </Principal>
+            <Dependent Role="Detalle_Excursiones">
+              <PropertyRef Name="excursion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Excursiones_Tipo_Excursiones">
+          <End Role="Tipo_Excursiones" Type="Self.Tipo_Excursiones" Multiplicity="1" />
+          <End Role="Excursiones" Type="Self.Excursiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Excursiones">
+              <PropertyRef Name="tipo_excursion_id" />
+            </Principal>
+            <Dependent Role="Excursiones">
+              <PropertyRef Name="tipo_excursion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Foro_Debate_Foro">
+          <End Role="Foro" Type="Self.Foro" Multiplicity="1" />
+          <End Role="Foro_Debate" Type="Self.Foro_Debate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foro">
+              <PropertyRef Name="foro_id" />
+            </Principal>
+            <Dependent Role="Foro_Debate">
+              <PropertyRef Name="foro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Foro_Debate_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Foro_Debate" Type="Self.Foro_Debate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="Foro_Debate">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Foro_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Foro" Type="Self.Foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="Foro">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="departamento_id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="departamento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="perfil_id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="perfil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tursArgBDModelStoreContainer">
+          <EntitySet Name="Atractivo_Turisticos" EntityType="Self.Atractivo_Turisticos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Excursiones" EntityType="Self.Excursiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Foro" EntityType="Self.Foro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Excursiones" EntityType="Self.Tipo_Excursiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Excursiones" EntityType="Self.Detalle_Excursiones" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Detalle_Excursiones].[excursion_id] AS [excursion_id], 
+    [Detalle_Excursiones].[atractivo_turistico_id] AS [atractivo_turistico_id], 
+    [Detalle_Excursiones].[detalle] AS [detalle]
+    FROM [dbo].[Detalle_Excursiones] AS [Detalle_Excursiones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Foro_Debate" EntityType="Self.Foro_Debate" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Foro_Debate].[foro_id] AS [foro_id], 
+    [Foro_Debate].[usuario_id] AS [usuario_id], 
+    [Foro_Debate].[mensaje] AS [mensaje], 
+    [Foro_Debate].[fecha] AS [fecha]
+    FROM [dbo].[Foro_Debate] AS [Foro_Debate]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Atractivo_Turisticos_Categoria" Association="Self.FK_Atractivo_Turisticos_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Atractivo_Turisticos" EntitySet="Atractivo_Turisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Atractivo_Turisticos_Localidad" Association="Self.FK_Atractivo_Turisticos_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Atractivo_Turisticos" EntitySet="Atractivo_Turisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Usuarios" Association="Self.FK_Chat_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Excursiones_Atractivo_Turisticos" Association="Self.FK_Detalle_Excursiones_Atractivo_Turisticos">
+            <End Role="Atractivo_Turisticos" EntitySet="Atractivo_Turisticos" />
+            <End Role="Detalle_Excursiones" EntitySet="Detalle_Excursiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Excursiones_Excursiones" Association="Self.FK_Detalle_Excursiones_Excursiones">
+            <End Role="Excursiones" EntitySet="Excursiones" />
+            <End Role="Detalle_Excursiones" EntitySet="Detalle_Excursiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Excursiones_Tipo_Excursiones" Association="Self.FK_Excursiones_Tipo_Excursiones">
+            <End Role="Tipo_Excursiones" EntitySet="Tipo_Excursiones" />
+            <End Role="Excursiones" EntitySet="Excursiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Foro_Debate_Foro" Association="Self.FK_Foro_Debate_Foro">
+            <End Role="Foro" EntitySet="Foro" />
+            <End Role="Foro_Debate" EntitySet="Foro_Debate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Foro_Debate_Usuarios" Association="Self.FK_Foro_Debate_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Foro_Debate" EntitySet="Foro_Debate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Foro_Usuarios" Association="Self.FK_Foro_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Foro" EntitySet="Foro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Departamentos" Association="Self.FK_Localidad_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_perfil" Association="Self.FK_Usuarios_perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tursArgBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Atractivo_Turisticos">
+          <Key>
+            <PropertyRef Name="atractivo_turistico_id" />
+          </Key>
+          <Property Name="atractivo_turistico_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="localidad_id" Type="Int32" Nullable="false" />
+          <Property Name="categoria_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Atractivo_Turisticos_Categoria" FromRole="Atractivo_Turisticos" ToRole="Categoria" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_Atractivo_Turisticos_Localidad" FromRole="Atractivo_Turisticos" ToRole="Localidad" />
+          <NavigationProperty Name="Detalle_Excursiones" Relationship="Self.FK_Detalle_Excursiones_Atractivo_Turisticos" FromRole="Atractivo_Turisticos" ToRole="Detalle_Excursiones" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="categoria_id" />
+          </Key>
+          <Property Name="categoria_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoria1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Atractivo_Turisticos" Relationship="Self.FK_Atractivo_Turisticos_Categoria" FromRole="Categoria" ToRole="Atractivo_Turisticos" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="chat_id" />
+          </Key>
+          <Property Name="chat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usuario_no_reg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emial_usuario_no_reg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="consulta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="respuesta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_id" Type="Int32" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Chat_Usuarios" FromRole="Chat" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="departamento_id" />
+          </Key>
+          <Property Name="departamento_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departamento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Departamentos" FromRole="Departamentos" ToRole="Localidad" />
+        </EntityType>
+        <EntityType Name="Excursiones">
+          <Key>
+            <PropertyRef Name="excursion_id" />
+          </Key>
+          <Property Name="excursion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_excursion_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detalle_Excursiones" Relationship="Self.FK_Detalle_Excursiones_Excursiones" FromRole="Excursiones" ToRole="Detalle_Excursiones" />
+          <NavigationProperty Name="Tipo_Excursiones" Relationship="Self.FK_Excursiones_Tipo_Excursiones" FromRole="Excursiones" ToRole="Tipo_Excursiones" />
+        </EntityType>
+        <EntityType Name="Foro">
+          <Key>
+            <PropertyRef Name="foro_id" />
+          </Key>
+          <Property Name="foro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="titulo_tema" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion_tema" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_ini" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_cierre" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Foro_Debate" Relationship="Self.FK_Foro_Debate_Foro" FromRole="Foro" ToRole="Foro_Debate" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Foro_Usuarios" FromRole="Foro" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="localidad_id" />
+          </Key>
+          <Property Name="localidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="localidad1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departamento_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Atractivo_Turisticos" Relationship="Self.FK_Atractivo_Turisticos_Localidad" FromRole="Localidad" ToRole="Atractivo_Turisticos" />
+          <NavigationProperty Name="Departamentos" Relationship="Self.FK_Localidad_Departamentos" FromRole="Localidad" ToRole="Departamentos" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="perfil_id" />
+          </Key>
+          <Property Name="perfil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfil1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_perfil" FromRole="Perfil" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Excursiones">
+          <Key>
+            <PropertyRef Name="tipo_excursion_id" />
+          </Key>
+          <Property Name="tipo_excursion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Excursiones" Relationship="Self.FK_Excursiones_Tipo_Excursiones" FromRole="Tipo_Excursiones" ToRole="Excursiones" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfil_id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_alta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_baja" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Chat" Relationship="Self.FK_Chat_Usuarios" FromRole="Usuarios" ToRole="Chat" />
+          <NavigationProperty Name="Foro" Relationship="Self.FK_Foro_Usuarios" FromRole="Usuarios" ToRole="Foro" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK_Usuarios_perfil" FromRole="Usuarios" ToRole="Perfil" />
+          <NavigationProperty Name="Foro_Debate" Relationship="Self.FK_Foro_Debate_Usuarios" FromRole="Usuarios" ToRole="Foro_Debate" />
+        </EntityType>
+        <EntityType Name="Detalle_Excursiones">
+          <Key>
+            <PropertyRef Name="excursion_id" />
+            <PropertyRef Name="atractivo_turistico_id" />
+          </Key>
+          <Property Name="excursion_id" Type="Int32" Nullable="false" />
+          <Property Name="atractivo_turistico_id" Type="Int32" Nullable="false" />
+          <Property Name="detalle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Atractivo_Turisticos" Relationship="Self.FK_Detalle_Excursiones_Atractivo_Turisticos" FromRole="Detalle_Excursiones" ToRole="Atractivo_Turisticos" />
+          <NavigationProperty Name="Excursiones" Relationship="Self.FK_Detalle_Excursiones_Excursiones" FromRole="Detalle_Excursiones" ToRole="Excursiones" />
+        </EntityType>
+        <EntityType Name="Foro_Debate">
+          <Key>
+            <PropertyRef Name="foro_id" />
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="foro_id" Type="Int32" Nullable="false" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="mensaje" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Foro" Relationship="Self.FK_Foro_Debate_Foro" FromRole="Foro_Debate" ToRole="Foro" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Foro_Debate_Usuarios" FromRole="Foro_Debate" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Atractivo_Turisticos_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Atractivo_Turisticos" Type="Self.Atractivo_Turisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="categoria_id" />
+            </Principal>
+            <Dependent Role="Atractivo_Turisticos">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Atractivo_Turisticos_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="Atractivo_Turisticos" Type="Self.Atractivo_Turisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="localidad_id" />
+            </Principal>
+            <Dependent Role="Atractivo_Turisticos">
+              <PropertyRef Name="localidad_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Excursiones_Atractivo_Turisticos">
+          <End Role="Atractivo_Turisticos" Type="Self.Atractivo_Turisticos" Multiplicity="1" />
+          <End Role="Detalle_Excursiones" Type="Self.Detalle_Excursiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Atractivo_Turisticos">
+              <PropertyRef Name="atractivo_turistico_id" />
+            </Principal>
+            <Dependent Role="Detalle_Excursiones">
+              <PropertyRef Name="atractivo_turistico_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="departamento_id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="departamento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Excursiones_Excursiones">
+          <End Role="Excursiones" Type="Self.Excursiones" Multiplicity="1" />
+          <End Role="Detalle_Excursiones" Type="Self.Detalle_Excursiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Excursiones">
+              <PropertyRef Name="excursion_id" />
+            </Principal>
+            <Dependent Role="Detalle_Excursiones">
+              <PropertyRef Name="excursion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Excursiones_Tipo_Excursiones">
+          <End Role="Tipo_Excursiones" Type="Self.Tipo_Excursiones" Multiplicity="1" />
+          <End Role="Excursiones" Type="Self.Excursiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Excursiones">
+              <PropertyRef Name="tipo_excursion_id" />
+            </Principal>
+            <Dependent Role="Excursiones">
+              <PropertyRef Name="tipo_excursion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Foro_Debate_Foro">
+          <End Role="Foro" Type="Self.Foro" Multiplicity="1" />
+          <End Role="Foro_Debate" Type="Self.Foro_Debate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foro">
+              <PropertyRef Name="foro_id" />
+            </Principal>
+            <Dependent Role="Foro_Debate">
+              <PropertyRef Name="foro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Foro_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Foro" Type="Self.Foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="Foro">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="perfil_id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="perfil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Foro_Debate_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Foro_Debate" Type="Self.Foro_Debate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="Foro_Debate">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tursArgBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Atractivo_Turisticos" EntityType="Self.Atractivo_Turisticos" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" />
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
+          <EntitySet Name="Excursiones" EntityType="Self.Excursiones" />
+          <EntitySet Name="Foro" EntityType="Self.Foro" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tipo_Excursiones" EntityType="Self.Tipo_Excursiones" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Detalle_Excursiones" EntityType="Self.Detalle_Excursiones" />
+          <EntitySet Name="Foro_Debate" EntityType="Self.Foro_Debate" />
+          <AssociationSet Name="FK_Atractivo_Turisticos_Categoria" Association="Self.FK_Atractivo_Turisticos_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Atractivo_Turisticos" EntitySet="Atractivo_Turisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Atractivo_Turisticos_Localidad" Association="Self.FK_Atractivo_Turisticos_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Atractivo_Turisticos" EntitySet="Atractivo_Turisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Excursiones_Atractivo_Turisticos" Association="Self.FK_Detalle_Excursiones_Atractivo_Turisticos">
+            <End Role="Atractivo_Turisticos" EntitySet="Atractivo_Turisticos" />
+            <End Role="Detalle_Excursiones" EntitySet="Detalle_Excursiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Usuarios" Association="Self.FK_Chat_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Departamentos" Association="Self.FK_Localidad_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Excursiones_Excursiones" Association="Self.FK_Detalle_Excursiones_Excursiones">
+            <End Role="Excursiones" EntitySet="Excursiones" />
+            <End Role="Detalle_Excursiones" EntitySet="Detalle_Excursiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Excursiones_Tipo_Excursiones" Association="Self.FK_Excursiones_Tipo_Excursiones">
+            <End Role="Tipo_Excursiones" EntitySet="Tipo_Excursiones" />
+            <End Role="Excursiones" EntitySet="Excursiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Foro_Debate_Foro" Association="Self.FK_Foro_Debate_Foro">
+            <End Role="Foro" EntitySet="Foro" />
+            <End Role="Foro_Debate" EntitySet="Foro_Debate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Foro_Usuarios" Association="Self.FK_Foro_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Foro" EntitySet="Foro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_perfil" Association="Self.FK_Usuarios_perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Foro_Debate_Usuarios" Association="Self.FK_Foro_Debate_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Foro_Debate" EntitySet="Foro_Debate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tursArgBDModelStoreContainer" CdmEntityContainer="tursArgBDEntities">
+          <EntitySetMapping Name="Atractivo_Turisticos">
+            <EntityTypeMapping TypeName="tursArgBDModel.Atractivo_Turisticos">
+              <MappingFragment StoreEntitySet="Atractivo_Turisticos">
+                <ScalarProperty Name="atractivo_turistico_id" ColumnName="atractivo_turistico_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="localidad_id" ColumnName="localidad_id" />
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="tursArgBDModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+                <ScalarProperty Name="categoria1" ColumnName="categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="tursArgBDModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="chat_id" ColumnName="chat_id" />
+                <ScalarProperty Name="nombre_usuario_no_reg" ColumnName="nombre_usuario_no_reg" />
+                <ScalarProperty Name="emial_usuario_no_reg" ColumnName="emial_usuario_no_reg" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="consulta" ColumnName="consulta" />
+                <ScalarProperty Name="respuesta" ColumnName="respuesta" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="tursArgBDModel.Departamentos">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Excursiones">
+            <EntityTypeMapping TypeName="tursArgBDModel.Excursiones">
+              <MappingFragment StoreEntitySet="Excursiones">
+                <ScalarProperty Name="excursion_id" ColumnName="excursion_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo_excursion_id" ColumnName="tipo_excursion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foro">
+            <EntityTypeMapping TypeName="tursArgBDModel.Foro">
+              <MappingFragment StoreEntitySet="Foro">
+                <ScalarProperty Name="foro_id" ColumnName="foro_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="titulo_tema" ColumnName="titulo_tema" />
+                <ScalarProperty Name="descripcion_tema" ColumnName="descripcion_tema" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidad">
+            <EntityTypeMapping TypeName="tursArgBDModel.Localidad">
+              <MappingFragment StoreEntitySet="Localidad">
+                <ScalarProperty Name="localidad_id" ColumnName="localidad_id" />
+                <ScalarProperty Name="localidad1" ColumnName="localidad" />
+                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfil">
+            <EntityTypeMapping TypeName="tursArgBDModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
+                <ScalarProperty Name="perfil1" ColumnName="perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="tursArgBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Excursiones">
+            <EntityTypeMapping TypeName="tursArgBDModel.Tipo_Excursiones">
+              <MappingFragment StoreEntitySet="Tipo_Excursiones">
+                <ScalarProperty Name="tipo_excursion_id" ColumnName="tipo_excursion_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="tursArgBDModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="fecha_alta" ColumnName="fecha_alta" />
+                <ScalarProperty Name="fecha_baja" ColumnName="fecha_baja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Excursiones">
+            <EntityTypeMapping TypeName="tursArgBDModel.Detalle_Excursiones">
+              <MappingFragment StoreEntitySet="Detalle_Excursiones">
+                <ScalarProperty Name="excursion_id" ColumnName="excursion_id" />
+                <ScalarProperty Name="atractivo_turistico_id" ColumnName="atractivo_turistico_id" />
+                <ScalarProperty Name="detalle" ColumnName="detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foro_Debate">
+            <EntityTypeMapping TypeName="tursArgBDModel.Foro_Debate">
+              <MappingFragment StoreEntitySet="Foro_Debate">
+                <ScalarProperty Name="foro_id" ColumnName="foro_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

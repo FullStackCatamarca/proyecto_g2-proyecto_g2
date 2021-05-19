@@ -1,0 +1,59 @@
+﻿@model List<TursArg.Models.TableViewModels.UserTableViewModel>
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h2>Usuarios</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Usuario/Add")'" value="Nuevo Usuario" />
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Fecha Alta</th>
+                <th></th>
+            </tr>
+
+            @foreach (var oElemento in Model)
+            {
+        <tr>
+            <td>@oElemento.Id</td>
+            <td>@oElemento.Email</td>
+            <td>@oElemento.Nombres</td>
+            <td>@oElemento.Apellidos</td>
+            <td>@oElemento.Fecha_Alta</td>
+            <td>
+                <input onclick="jsDelete(@oElemento.Id);" type="button" value="Eliminar" class="btn btn-danger" />
+                <input onclick="document.location.href='@Url.Content("~/Usuario/Edit/"+oElemento.Id)'" type="button" value="Editar" class="btn btn-default" />
+            </td>
+        </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    function jsDelete(id) {
+        if (confirm("Estas seguro de eliminar el usuario?")) {
+            url = "@Url.Content("~/Usuario/Delete")" + "/"+id;
+
+            $.post(url, function (data) {
+
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Usuario/")"
+                } else {
+                    alert("Ocurrio un error :(")
+                }
+
+            })
+        }
+    }
+</script>

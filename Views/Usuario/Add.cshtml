@@ -1,0 +1,55 @@
+﻿@model TursArg.Models.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Agregar Usuario";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Add", "Usuario", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+            @Html.LabelFor(d => d.Email)
+            @Html.TextBoxFor(d => d.Email, new { @class = "form-control" })
+            @Html.ValidationMessage("Email", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(d => d.Password)
+            @Html.PasswordFor(d => d.Password, new { @class = "form-control" })
+            @Html.ValidationMessage("Password", new { @class = "text-danger" })<br />
+
+
+            @Html.LabelFor(d => d.ConfirmPassword)
+            @Html.PasswordFor(d => d.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessage("ConfirmPassword", new { @class = "text-danger" })<br />
+
+
+            @Html.LabelFor(d => d.Nombres)
+            @Html.TextBoxFor(d => d.Nombres, new { @class = "form-control" })
+            @Html.ValidationMessage("Nombres", new { @class = "text-danger" })<br />
+
+            @Html.LabelFor(d => d.Apellidos)
+            @Html.TextBoxFor(d => d.Apellidos, new { @class = "form-control" })
+            @Html.ValidationMessage("Apellidos", new { @class = "text-danger" })<br />
+
+
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
